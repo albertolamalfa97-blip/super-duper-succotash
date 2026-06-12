@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Per Federica 🌸</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Quicksand:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --rosa: #e0639a;
+    --rosa-scuro: #b13d72;
+    --lilla: #b89be0;
+    --crema: #fff8fb;
+    --inchiostro: #4a2438;
+  }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: linear-gradient(160deg, #fde4ef 0%, #f3d9f5 45%, #e3d4f7 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: var(--inchiostro);
+    position: relative;
+  }
+
+  /* fiori che cadono */
+  .petalo {
+    position: fixed;
+    top: -5vh;
+    font-size: 18px;
+    animation: cadi linear infinite;
+    pointer-events: none;
+    opacity: .8;
+    z-index: 1;
+  }
+  @keyframes cadi {
+    0%   { transform: translateY(-5vh) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .petalo { display: none; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  .card {
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(6px);
+    border-radius: 28px;
+    box-shadow: 0 20px 60px rgba(177,61,114,.22);
+    padding: 44px 32px 38px;
+    width: min(92vw, 460px);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    animation: entra .5s ease both;
+  }
+  @keyframes entra {
+    from { opacity: 0; transform: translateY(18px) scale(.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .emoji-hero { font-size: 64px; line-height: 1; margin-bottom: 18px; display: block; }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 6vw, 34px);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .sotto { font-size: 15px; color: #8a5a74; margin-bottom: 26px; }
+
+  .bottoni { display: flex; gap: 18px; justify-content: center; align-items: center; flex-wrap: wrap; position: relative; min-height: 60px; }
+
+  button {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 34px;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  button:focus-visible { outline: 3px solid var(--rosa-scuro); outline-offset: 3px; }
+
+  .si {
+    background: linear-gradient(135deg, var(--rosa), var(--rosa-scuro));
+    color: white;
+    box-shadow: 0 8px 22px rgba(177,61,114,.35);
+  }
+  .si:hover { transform: scale(1.08); box-shadow: 0 12px 28px rgba(177,61,114,.45); }
+
+  .no {
+    background: var(--lilla);
+    color: white;
+    position: relative;
+    transition: top .18s ease, left .18s ease;
+  }
+  .no.fuggito {
+    position: fixed;
+    z-index: 50;
+    transition: top .22s cubic-bezier(.3,1.4,.5,1), left .22s cubic-bezier(.3,1.4,.5,1);
+  }
+
+  .commento-no {
+    font-size: 13px;
+    color: var(--rosa-scuro);
+    font-weight: 600;
+    min-height: 18px;
+    margin-top: 16px;
+  }
+
+  /* griglie opzioni */
+  .griglia {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin-top: 6px;
+  }
+  .opzione {
+    background: #fdeef6;
+    border: 2px solid transparent;
+    border-radius: 18px;
+    padding: 16px 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--inchiostro);
+    transition: all .15s ease;
+  }
+  .opzione .ico { display: block; font-size: 30px; margin-bottom: 6px; }
+  @media (hover: hover) {
+    .opzione:hover { transform: translateY(-3px); background: #fbd9ec; }
+    .si:hover { transform: scale(1.08); box-shadow: 0 12px 28px rgba(177,61,114,.45); }
+    .avanti.attivo:hover { transform: scale(1.05); }
+  }
+  .opzione.scelta {
+    border-color: var(--rosa);
+    background: #fbd0e6;
+    box-shadow: 0 6px 16px rgba(224,99,154,.3);
+  }
+
+  .avanti {
+    margin-top: 24px;
+    background: linear-gradient(135deg, var(--rosa), var(--rosa-scuro));
+    color: white;
+    box-shadow: 0 8px 22px rgba(177,61,114,.35);
+    opacity: .45;
+    pointer-events: none;
+  }
+  .avanti.attivo { opacity: 1; pointer-events: auto; }
+  .avanti.attivo:hover { transform: scale(1.05); }
+
+  .finale p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 18px 0 6px;
+  }
+  .firma { font-size: 14px; color: #8a5a74; margin-top: 14px; }
+
+  .riepilogo {
+    background: #fdeef6;
+    border-radius: 16px;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 20px;
+    color: var(--rosa-scuro);
+  }
+
+  .cuore-battito { display: inline-block; animation: batti 1.1s ease-in-out infinite; }
+  @keyframes batti {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.25); }
+    40% { transform: scale(1); }
+    55% { transform: scale(1.18); }
+  }
+
+  .step { display: none; }
+  .step.attivo { display: block; }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- STEP 1: la domanda -->
+  <div class="step attivo" id="step1">
+    <span class="emoji-hero">🐶</span>
+    <h1>🌸 Federica, signora del Mule…<br>vuoi uscire con me? 🌸</h1>
+    <p class="sotto">Pensaci bene… (ma neanche troppo)</p>
+    <div class="bottoni">
+      <button class="si" onclick="vaiAllo(2)">SÌ ♥</button>
+      <button class="no" id="btnNo" aria-label="No (buona fortuna a cliccarlo)">No</button>
+    </div>
+    <div class="commento-no" id="commentoNo"></div>
+  </div>
+
+  <!-- STEP 2: sorpresa -->
+  <div class="step" id="step2">
+    <span class="emoji-hero">😳</span>
+    <h1>Aspetta… hai detto davvero SÌ?</h1>
+    <p class="sotto">Sinceramente, Piccolina, mi aspettavo un no.<br>Avevo già pronto il discorso strappalacrime e tutto. Vabbè, meglio così! 🥹</p>
+    <button class="si" onclick="vaiAllo(3)">Ok ok, andiamo avanti →</button>
+  </div>
+
+  <!-- STEP 3: quando -->
+  <div class="step" id="step3">
+    <span class="emoji-hero">📅</span>
+    <h1>Quando sei libera?</h1>
+    <p class="sotto">Scegli il giorno (io mi libero comunque, ovvio)</p>
+    <div class="griglia" id="grigliaGiorni"></div>
+    <button class="avanti" id="avantiGiorno" onclick="vaiAllo(4)">Confermo questo giorno ♥</button>
+  </div>
+
+  <!-- STEP 4: cosa mangiamo -->
+  <div class="step" id="step4">
+    <span class="emoji-hero">😋</span>
+    <h1>E cosa ti andrebbe?</h1>
+    <p class="sotto">Guarda che poi non si cambia idea, eh</p>
+    <div class="griglia" id="grigliaCibo">
+      <button class="opzione" data-cibo="Sushi"><span class="ico">🍣</span>Sushi</button>
+      <button class="opzione" data-cibo="Pizza"><span class="ico">🍕</span>Pizza</button>
+      <button class="opzione" data-cibo="Pasta"><span class="ico">🍝</span>Pasta</button>
+      <button class="opzione" data-cibo="Cinese"><span class="ico">🥡</span>Cinese</button>
+      <button class="opzione" data-cibo="Messicano"><span class="ico">🌮</span>Messicano</button>
+      <button class="opzione" data-cibo="Hamburger"><span class="ico">🍔</span>Hamburger</button>
+    </div>
+    <button class="avanti" id="avantiCibo" onclick="vaiAllo(5)">Perfetto, prenoto! ♥</button>
+  </div>
+
+  <!-- STEP 5: finale romantico -->
+  <div class="step finale" id="step5">
+    <span class="emoji-hero"><span class="cuore-battito">❤️</span></span>
+    <h1>Allora è ufficiale, Piccolina.</h1>
+    <p>
+      Non so come andrà, ma so una cosa:<br>
+      di tutte le domande che potevo farti,<br>
+      questa era l'unica a cui tenevo davvero la risposta.<br>
+      E hai detto sì. A me. Volontariamente.<br>
+      Il giorno più fortunato della mia vita, praticamente.
+    </p>
+    <div class="riepilogo" id="riepilogo"></div>
+    <p class="firma">Non vedo l'ora 🌸 — preparati al miglior appuntamento di sempre.</p>
+  </div>
+
+</div>
+
+<script>
+  // ---------- petali che cadono ----------
+  const simboli = ['🌸','💮','🌷','✨','💗'];
+  for (let i = 0; i < 16; i++) {
+    const p = document.createElement('div');
+    p.className = 'petalo';
+    p.textContent = simboli[Math.floor(Math.random() * simboli.length)];
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (6 + Math.random() * 8) + 's';
+    p.style.animationDelay = (Math.random() * 8) + 's';
+    p.style.fontSize = (12 + Math.random() * 14) + 'px';
+    document.body.appendChild(p);
+  }
+
+  // ---------- navigazione step ----------
+  let scelte = { giorno: null, cibo: null };
+  function vaiAllo(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('attivo'));
+    document.getElementById('step' + n).classList.add('attivo');
+    if (n === 5) {
+      document.getElementById('riepilogo').innerHTML =
+        '📅 ' + scelte.giorno + ' &nbsp;·&nbsp; ' + scelte.cibo + ' &nbsp;·&nbsp; tu + io ♥';
+    }
+  }
+
+  // ---------- bottone NO che scappa ----------
+  const btnNo = document.getElementById('btnNo');
+  const commenti = [
+    'Eh no, troppo lenta! 😜',
+    'Il bottone ha paura di te, Piccolina',
+    'Riprova, sarai più fortunata',
+    'Niente da fare 🙃',
+    'Il destino ha già deciso…',
+    'Forse era un segno?',
+    'Dai, tanto lo sai qual è la risposta giusta ♥'
+  ];
+  let tentativi = 0;
+
+  function scappa() {
+    btnNo.classList.add('fuggito');
+    const margine = 70;
+    const x = margine + Math.random() * (window.innerWidth - btnNo.offsetWidth - margine * 2);
+    const y = margine + Math.random() * (window.innerHeight - btnNo.offsetHeight - margine * 2);
+    btnNo.style.left = x + 'px';
+    btnNo.style.top = y + 'px';
+    document.getElementById('commentoNo').textContent =
+      commenti[Math.min(tentativi, commenti.length - 1)];
+    tentativi++;
+    // dopo troppi tentativi il bottone si rimpicciolisce fino a sparire
+    if (tentativi > 6) {
+      const scala = Math.max(0.3, 1 - (tentativi - 6) * 0.15);
+      btnNo.style.transform = 'scale(' + scala + ')';
+    }
+    if (tentativi > 11) {
+      btnNo.style.display = 'none';
+      document.getElementById('commentoNo').textContent = 'Il "no" si è arreso. Rimane una sola opzione… 💘';
+    }
+  }
+
+  btnNo.addEventListener('mouseenter', scappa);
+  btnNo.addEventListener('touchstart', (e) => { e.preventDefault(); scappa(); }, { passive: false });
+  btnNo.addEventListener('click', (e) => { e.preventDefault(); scappa(); });
+
+  // ---------- calendario: prossimi 6 giorni ----------
+  const giorni = ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'];
+  const mesi = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+  const griglia = document.getElementById('grigliaGiorni');
+  const oggi = new Date();
+
+  // opzione speciale: venerdì sera
+  const ven = document.createElement('button');
+  ven.className = 'opzione';
+  ven.style.gridColumn = '1 / -1';
+  ven.style.background = 'linear-gradient(135deg, #fbd0e6, #e8d9fb)';
+  ven.innerHTML = '<span class="ico">🌙</span>Venerdì sera<br><small>l\'opzione consigliata dalla casa ♥</small>';
+  ven.addEventListener('click', () => {
+    griglia.querySelectorAll('.opzione').forEach(o => o.classList.remove('scelta'));
+    ven.classList.add('scelta');
+    scelte.giorno = 'Venerdì sera';
+    document.getElementById('avantiGiorno').classList.add('attivo');
+  });
+  griglia.appendChild(ven);
+
+  for (let i = 1; i <= 6; i++) {
+    const d = new Date(oggi);
+    d.setDate(oggi.getDate() + i);
+    const b = document.createElement('button');
+    b.className = 'opzione';
+    b.innerHTML = '<span class="ico">' + (i === 1 ? '⚡' : '🗓️') + '</span>' +
+      giorni[d.getDay()] + '<br><small>' + d.getDate() + ' ' + mesi[d.getMonth()] + '</small>';
+    const etichetta = giorni[d.getDay()] + ' ' + d.getDate() + ' ' + mesi[d.getMonth()];
+    b.addEventListener('click', () => {
+      griglia.querySelectorAll('.opzione').forEach(o => o.classList.remove('scelta'));
+      b.classList.add('scelta');
+      scelte.giorno = etichetta;
+      document.getElementById('avantiGiorno').classList.add('attivo');
+    });
+    griglia.appendChild(b);
+  }
+
+  // ---------- scelta cibo ----------
+  document.querySelectorAll('#grigliaCibo .opzione').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('#grigliaCibo .opzione').forEach(o => o.classList.remove('scelta'));
+      b.classList.add('scelta');
+      scelte.cibo = b.dataset.cibo;
+      document.getElementById('avantiCibo').classList.add('attivo');
+    });
+  });
+</script>
+</body>
+</html>
